@@ -4,19 +4,20 @@
 local key_map_opt = {noremap = true, silent = true}
 vim.g.mapleader = " " 					-- configure the space bar as the leader button	
 
-----------------------------------------
 -- insert mode key mapping
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', key_map_opt)
 vim.api.nvim_set_keymap('n', 'j', [[v:count ? 'j' : 'gj']], {noremap = true, expr = true})
 vim.api.nvim_set_keymap('n', 'k', [[v:count ? 'k' : 'gk']], {noremap = true, expr = true})
 
-----------------------------------------
 -- normal mode key mapping
 
 -- basic key mapping
 vim.api.nvim_set_keymap('n', 'W', ':w<CR>', key_map_opt)
 vim.api.nvim_set_keymap('n', 'Q', ':q<CR>', key_map_opt)
 
+
+----------------------------------------
+-- about screen
 -- split screen processing
 vim.api.nvim_set_keymap('n', '<leader>l', ':vsplit<CR><C-w>l', key_map_opt)
 vim.api.nvim_set_keymap('n', '<leader>h', ':vsplit<CR><C-w>h', key_map_opt)
@@ -33,6 +34,10 @@ vim.api.nvim_set_keymap('', '<Down>', ':res -2<CR>', key_map_opt)
 -- config relative number
 vim.o.number = true 			
 vim.o.relativenumber = true
+
+-- about font
+vim.o.cursorline = true
+vim.o.guifont = "RobotoMono:16"
 
 -- config system clipboard
 vim.o.clipboard = "unnamed" 	
@@ -52,6 +57,11 @@ vim.api.nvim_create_autocmd({"TextYankPost"}, {
 
 
 ------------------------------plugins------------------------------
+-- plugins list
+plugins = { 
+	"ajmwagar/vim-deus" 			 		-- color theme
+}
+
 ----------------------------------------
 -- lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim" 	-- set the path of lazy.nvim
@@ -68,4 +78,9 @@ if not vim.loop.fs_stat(lazypath) then 				-- download the file of the lazy.nvim
 end
 vim.opt.rtp:prepend(lazypath) 					-- add lazy.nvim's path to tht runtim path
 require("lazy").setup(plugins, opts) 				-- load lazy.nvim
+
+
+------------------------------plugins' configration------------------------------
+-- config color scheme
+vim.cmd.colorscheme("deus")
 
