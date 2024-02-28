@@ -250,6 +250,12 @@ lspconfig['lua_ls'].setup {
 	capabilities = capabilities
 }
 
+-- load clangd
+lspconfig['clangd'].setup {
+		filetype = {"c", "cpp", "cuda"},
+		capabilities = capabilities
+}
+
 
 ------------------------------code completion------------------------------
 -- Set up nvim-cmp.

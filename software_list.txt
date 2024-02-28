@@ -8,4 +8,8 @@ url : https://github.com/BurntSushi/ripgrep
 ------------------------------LuaSnip------------------------------
 name: make
 
+------------------------------clangd------------------------------
+name: gcc
+name: g++
+
 
