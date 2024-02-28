@@ -1,3 +1,4 @@
+vim.api.nvim_set_keymap('n', '<leader>[', '<C-o>', key_map_opt)
 ------------------------------basic config------------------------------
 ----------------------------------------
 -- key mapping
@@ -30,6 +31,10 @@ vim.api.nvim_set_keymap('', '<Right>', ':vertical resize+2<CR>', key_map_opt)
 vim.api.nvim_set_keymap('', '<Up>', ':res +2<CR>', key_map_opt)
 vim.api.nvim_set_keymap('', '<Down>', ':res -2<CR>', key_map_opt)
 
+-- about tag
+vim.api.nvim_set_keymap('n', '<leader>[', '<C-o>', key_map_opt)
+vim.api.nvim_set_keymap('n', '<leader>]', '<C-i>', key_map_opt)
+
 
 -- config relative number
 vim.o.number = true 			
@@ -38,6 +43,7 @@ vim.o.relativenumber = true
 -- about font
 vim.o.cursorline = true
 vim.o.guifont = "RobotoMono:16"
+vim.o.tabstop = 4
 
 -- config system clipboard
 vim.o.clipboard = "unnamed" 	
@@ -59,10 +65,28 @@ vim.api.nvim_create_autocmd({"TextYankPost"}, {
 ------------------------------plugins------------------------------
 -- plugins list
 plugins = { 
-	"ajmwagar/vim-deus" 			 		-- color theme
-}
-opts = {
-	root = vim.fn.stdpath("config") .. "/lazy" 		-- directory where plugins will be installed
+    {
+		"ajmwagar/vim-deus", 				-- color theme
+    },
+										
+	{	
+		"folke/persistence.nvim", 			-- record the nvim status
+		event = "BufReadPre", 				-- this will only start session saving when an actual file was opened
+	}, 
+	
+   {
+		cmd = "Telescope", 					-- telescope
+		keys = { 							-- key map
+				{"<leader>p", ":Telescope find_files<CR>", desc = "find files"},
+				{"<leader>P", ":Telescope live_grep<CR>", desc = "grep file"},
+				{"<leader>rs", ":Telescope resume<CR>", desc = "resume"},
+				{"<leader>o", ":Telescope oldfiles<CR>", desc = "oldfiles"},
+		},
+		'nvim-telescope/telescope.nvim', tag = '0.1.5',
+		dependencies = { 'nvim-lua/plenary.nvim' }
+   },
+
+
 }
 
 ----------------------------------------

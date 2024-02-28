@@ -1,0 +1,8 @@
+------------------------------lazy.nvim------------------------------
+font: RobotoMono
+
+------------------------------telescope.nvim------------------------------
+name: ripgrep 
+url : https://github.com/BurntSushi/ripgrep
+
+
