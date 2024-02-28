@@ -61,10 +61,13 @@ vim.api.nvim_create_autocmd({"TextYankPost"}, {
 plugins = { 
 	"ajmwagar/vim-deus" 			 		-- color theme
 }
+opts = {
+	root = vim.fn.stdpath("config") .. "/lazy" 		-- directory where plugins will be installed
+}
 
 ----------------------------------------
 -- lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim" 	-- set the path of lazy.nvim
+local lazypath = vim.fn.stdpath("config") .. "/lazy/lazy.nvim" 	-- set the path of lazy.nvim
 if not vim.loop.fs_stat(lazypath) then 				-- download the file of the lazy.nvim
   vim.fn.system({
     "git",
