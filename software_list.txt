@@ -5,4 +5,7 @@ font: RobotoMono
 name: ripgrep 
 url : https://github.com/BurntSushi/ripgrep
 
+------------------------------LuaSnip------------------------------
+name: make
+
 
