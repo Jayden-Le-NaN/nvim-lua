@@ -140,7 +140,17 @@ plugins = {
 		config = true
 		-- use opts = {} for passing setup options
 		-- this is equalent to setup({}) function
+	},
+	{
+			"someone-stole-my-name/yaml-companion.nvim",
 	}
+
+	--[[
+	{
+		-- yaml schemastore
+		"b0o/schemastore.nvim",
+	}
+	]]
 
 
 }
@@ -193,6 +203,8 @@ local mason_lspconfig_opts = {
 	ensure_installed = {
 		"lua_ls",
 		"clangd",
+		"yamlls",
+		-- "hydra_lsp",
 	},
 }
 
@@ -238,6 +250,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
+
 require("mason").setup(mason_opts)
 require("mason-lspconfig").setup(mason_lspconfig_opts)
 
@@ -252,9 +265,18 @@ lspconfig['lua_ls'].setup {
 
 -- load clangd
 lspconfig['clangd'].setup {
-		filetype = {"c", "cpp", "cuda"},
-		capabilities = capabilities
+	filetype = { "c", "cpp", "cuda" },
+	capabilities = capabilities
 }
+
+local cfg = require("yaml-companion").setup({
+  -- Add any options here, or leave empty to use the default settings
+  -- lspconfig = {
+  --   cmd = {"yaml-language-server"}
+  -- },
+  capabilities = capabilities,
+})
+require("lspconfig")["yamlls"].setup(cfg)
 
 
 ------------------------------code completion------------------------------
@@ -355,12 +377,11 @@ cmp.setup.cmdline(':', {
 ------------------------------autopairs------------------------------
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
+	'confirm_done',
+	cmp_autopairs.on_confirm_done()
 )
 
 ----------------------------------------neodev------------------------------
 require("neodev").setup({
 	-- add any options here, or leave empty to use the default settings
 })
-
